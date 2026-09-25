@@ -1,0 +1,12 @@
+node_modules/
+artifacts/
+cache/
+coverage/
+coverage.json
+typechain-types/
+.env
+frontend/node_modules/
+frontend/dist/
+frontend/*.js
+frontend/*.d.ts
+frontend/*.tsbuildinfo

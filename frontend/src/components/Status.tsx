@@ -1,0 +1,1 @@
+export function Status({ active }: { active: boolean }) { return <span className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${active ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-800"}`}>{active ? "AUTHENTIC PRODUCT" : "PRODUCT INVALIDATED"}</span>; }

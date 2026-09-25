@@ -1,0 +1,5 @@
+import { Link, NavLink } from "react-router-dom";
+import type { ReactNode } from "react";
+export function Layout({ children, wallet, connect }: { children: ReactNode; wallet?: string; connect: () => void }) {
+ return <><header className="border-b border-stone-200 bg-sand"><nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5"><Link to="/" className="text-xl font-black tracking-tight">FASHION<span className="text-accent">CHAIN</span></Link><div className="flex items-center gap-4 text-sm"><NavLink to="/dashboard">Dashboard</NavLink><NavLink to="/admin">Admin</NavLink><button onClick={connect} className="rounded bg-ink px-4 py-2 text-white">{wallet ? `${wallet.slice(0, 6)}…${wallet.slice(-4)}` : "Connect Wallet"}</button></div></nav></header><main className="mx-auto max-w-6xl px-5 py-12">{children}</main><footer className="mx-auto max-w-6xl border-t border-stone-200 px-5 py-6 text-xs text-stone-500">FashionChain is a fictional, unaudited portfolio demonstration. QR codes direct users to an on-chain verification query.</footer></>;
+}

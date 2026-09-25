@@ -1,0 +1,7 @@
+import { useState } from "react";
+import { BrowserProvider } from "ethers";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CHAIN_ID } from "./config/contracts";
+import { Layout } from "./components/Layout";
+import { Home } from "./pages/Home"; import { Verify } from "./pages/Verify"; import { ProductDetail } from "./pages/ProductDetail"; import { Admin } from "./pages/Admin"; import { Dashboard } from "./pages/Dashboard";
+export default function App() { const [wallet, setWallet] = useState<string>(); async function connect() { try { if (!window.ethereum) throw new Error("No browser wallet found. Install MetaMask."); const provider = new BrowserProvider(window.ethereum); await provider.send("eth_requestAccounts", []); const network = await provider.getNetwork(); if (Number(network.chainId) !== CHAIN_ID) throw new Error("Please switch to Sepolia."); setWallet(await (await provider.getSigner()).getAddress()); } catch (e) { alert(e instanceof Error ? e.message : "Wallet connection failed."); } } return <BrowserRouter><Layout wallet={wallet} connect={connect}><Routes><Route path="/" element={<Home/>}/><Route path="/verify/:productId" element={<Verify/>}/><Route path="/products/:productId" element={<ProductDetail/>}/><Route path="/admin" element={<Admin wallet={wallet}/>}/><Route path="/dashboard" element={<Dashboard wallet={wallet}/>}/></Routes></Layout></BrowserRouter> }
